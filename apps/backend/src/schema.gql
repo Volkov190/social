@@ -1,0 +1,41 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  email: String!
+  name: String!
+  birthdate: Timestamp!
+  gender: String!
+  friends: [User!]!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Query {
+  users: [User!]!
+}
+
+type Mutation {
+  createUser(user: InputUser!): User!
+  editUser(id: Float!, user: InputUser!): User!
+  deleteUser(id: Float!): User!
+  addFriend(userId: Float!, friendId: Float!): User!
+  deleteFriend(userId: Float!, friendId: Float!): User!
+}
+
+input InputUser {
+  email: String!
+  name: String!
+  birthdate: Timestamp!
+  gender: Gender!
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
