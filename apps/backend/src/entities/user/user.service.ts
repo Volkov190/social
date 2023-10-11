@@ -10,6 +10,14 @@ export class UsersService {
     return this.prismaService.user.findMany();
   }
 
+  async find(id: User['id']) {
+    return this.prismaService.user.findFirst({ where: { id } });
+  }
+
+  async findByEmail(email: User['email']) {
+    return this.prismaService.user.findFirst({ where: { email } });
+  }
+
   async create(user: InputUser) {
     return this.prismaService.user.create({ data: user });
   }
