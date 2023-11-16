@@ -108,20 +108,25 @@ const MessagesPage = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-5">
-        <div className="border border-green-300">
+        <div className="py-8 bg-primary rounded-md">
           {users.users.map((user) => (
             <div
-              className="cursor-pointer"
+              className={classnames(
+                "hover:bg-secondary w-full cursor-pointer px-8 py-2",
+                user.id === selectedUser?.id && "bg-secondary"
+              )}
               onClick={() => setSelectedUser(user)}
             >
               {user.name}
             </div>
           ))}
         </div>
-        <div className="border border-green-300 w-full p-4 max-h-[80vh]">
+        <div className="w-full max-h-[80vh]">
           {selectedUser && (
             <div className="flex flex-col gap-4 max-h-full">
-              Диалог с {selectedUser.name}
+              <div className="bg-primary p-4 rounded-md">
+                Диалог с {selectedUser.name}
+              </div>
               <div className="overflow-auto">
                 {messages?.map((message) => (
                   <div
@@ -132,7 +137,7 @@ const MessagesPage = () => {
                         : undefined
                     )}
                   >
-                    <span className="p-2 rounded-md bg-teal-200">
+                    <span className="p-2 rounded-md bg-secondary">
                       {message.text}
                     </span>
                   </div>
@@ -143,11 +148,15 @@ const MessagesPage = () => {
         </div>
       </div>
       <form
-        className="border border-green-300 flex gap-4 p-2"
+        className="bg-primary rounded-md flex gap-4 p-2"
         onSubmit={handleSubmit(submitHandler)}
       >
-        <input {...register("message")} className="w-full" />
-        <button type="submit" className="border border-green-300">
+        <input
+          {...register("message")}
+          autoComplete="off"
+          className="w-full focus-visible:outline-none px-8 bg-background"
+        />
+        <button type="submit" className="bg-accent rounded-lg text-background">
           Отправить сообщение
         </button>
       </form>

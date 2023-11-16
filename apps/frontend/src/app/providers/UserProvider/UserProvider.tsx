@@ -1,5 +1,5 @@
 import { UserContext, UserContextValues } from "@/shared/context/userContext";
-import { FC, PropsWithChildren, useCallback, useState } from "react";
+import { FC, PropsWithChildren, useCallback, useEffect, useState } from "react";
 
 const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<UserContextValues["user"]>(null);
@@ -20,6 +20,10 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
       credentials: "include",
     });
     setUser(null);
+  }, []);
+
+  useEffect(() => {
+    rememberMe();
   }, []);
 
   return (

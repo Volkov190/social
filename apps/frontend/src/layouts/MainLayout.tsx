@@ -5,7 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Routes, pageNames } from "../app/lib/routes";
 
 const MainLayout = () => {
-  const { user, logout, rememberMe } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const handleClickLogin = useCallback(() => {
     setIsLoginModalOpen(true);
@@ -28,24 +28,16 @@ const MainLayout = () => {
     window.open("http://localhost:3003/auth/github");
   }, []);
 
-  const handleTestAuthClick = useCallback(async () => {
-    await fetch("http://localhost:3003/auth/test-auth", {
-      method: "POST",
-      credentials: "include",
-    });
-    rememberMe();
-  }, [rememberMe]);
-
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      <div className="h-16 flex items-center px-8 bg-teal-200 justify-between">
+      <div className="h-16 flex items-center px-8 bg-secondary justify-between">
         <h1 className="text-2xl">Social</h1>
         {user ? (
-          <div>
+          <div className="flex gap-2 items-center">
             {user.name}
             <button
               onClick={logout}
-              className="bg-teal-500 p-1 rounded-lg text-white"
+              className="bg-accent p-1 rounded-lg text-background"
             >
               Выйти
             </button>
@@ -60,30 +52,52 @@ const MainLayout = () => {
                 setIsLoginModalOpen(false);
               }}
             >
-              <button onClick={handleClickGoogleLogin}>Google</button>
-              <button onClick={handleClickGithubLogin}>Github</button>
-              <button onClick={handleTestAuthClick}>Test auth</button>
+              <div className="flex flex-col gap-4">
+                <button
+                  className="bg-secondary rounded-lg p-2 shadow-md hover:bg-teal-300 hover:transition-colors duration-700 hover:shadow-lg hover:transition-shadow"
+                  onClick={handleClickGoogleLogin}
+                >
+                  Google
+                </button>
+                <button
+                  className="bg-secondary rounded-lg p-2 shadow-md hover:bg-teal-300 hover:transition-colors duration-700 hover:shadow-lg hover:transition-shadow"
+                  onClick={handleClickGithubLogin}
+                >
+                  Github
+                </button>
+              </div>
             </Modal>
             <button
               onClick={handleClickLogin}
-              className="bg-teal-500 p-1 rounded-lg text-white"
+              className="bg-accent p-1 rounded-lg text-background"
             >
               Войти
             </button>
           </>
         )}
       </div>
-      <div className="bg-teal-50 grow flex gap-8">
-        <nav className="bg-teal-100 w-1/5">
+      <div className="bg-background grow flex gap-8">
+        <nav className="w-1/5 bg-primary flex flex-col justify-between">
           <div className="flex flex-col p-8 gap-2">
             {Object.keys(pageNames).map((href) => (
               <NavLink
                 to={href}
-                className="bg-teal-200 rounded-lg p-2 shadow-md cursor-pointer"
+                className="bg-secondary rounded-lg p-2 shadow-md cursor-pointer"
               >
                 {pageNames[href as Routes]}
               </NavLink>
             ))}
+          </div>
+          <div className="p-8">
+            <button
+              className="bg-secondary p-2 rounded-lg"
+              onClick={() => {
+                const test = document.documentElement;
+                test.classList.toggle("dark");
+              }}
+            >
+              тема
+            </button>
           </div>
         </nav>
         <main className="grow p-8">

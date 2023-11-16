@@ -10,12 +10,12 @@ const UsersList: FC = () => {
       {data?.users.map((user) => (
         <div
           key={user.id}
-          className="bg-teal-200 p-4 rounded-lg hover:bg-teal-300 hover:cursor-pointer text-sky-800 shadow-md hover:shadow-lg hover:transition-colors duration-700 flex gap-2"
+          className="bg-secondary p-4 rounded-lg hover:bg-teal-300 hover:cursor-pointer text-sky-800 shadow-md hover:shadow-lg hover:transition-colors duration-700 flex gap-2"
         >
           {user.name}
           {user.birthdate}
-          <span className="before:block before:absolute before:-inset-1 before:-skew-y-1 before:bg-teal-500 relative inline-block">
-            <span className="text-white relative">{user.email}</span>
+          <span className="before:block before:absolute before:-inset-1 before:-skew-y-1 before:bg-accent relative inline-block text-background">
+            <span className="relative">{user.email}</span>
           </span>
         </div>
       ))}

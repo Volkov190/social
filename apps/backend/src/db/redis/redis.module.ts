@@ -5,7 +5,9 @@ import { createClient } from 'redis';
   providers: [
     {
       provide: 'REDIS',
-      useValue: createClient().connect(),
+      useValue: createClient({
+        url: 'redis://redis:6379',
+      }).connect(),
     },
   ],
   exports: ['REDIS'],

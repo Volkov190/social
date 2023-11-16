@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* 
+    DEPRECATED
+    --primary: 204 251 241;
+    --secondary: 153 246 228;
+    --background: 240 253 250;
+    --accent: 20 184 166; */
+
+    --primary: 206 180 130;
+    --secondary: 228 213 185;
+    --background: 246 242 233;
+    --accent: 151 117 59;
+    --text: 18 14 7;
+  }
+
+  .dark {
+    --primary: 125 98 49;
+    --secondary: 70 55 27;
+    --background: 22 18 9;
+    --accent: 196 163 104;
+    --text: 248 244 237;
+  }
+
+  body {
+    color: rgb(var(--text));
+  }
+}

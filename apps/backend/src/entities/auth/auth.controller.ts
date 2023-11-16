@@ -43,7 +43,7 @@ export class AuthController {
     this.redis.set(uuid, JSON.stringify(user));
     res.cookie('session', uuid, { httpOnly: true });
     return {
-      url: `${process.env.FRONTEND_URL}/login`,
+      url: `${process.env.FRONTEND_URL}/`,
     };
   }
 
@@ -60,7 +60,7 @@ export class AuthController {
     res.cookie('session', uuid, { httpOnly: true });
 
     return {
-      url: `${process.env.FRONTEND_URL}/login`,
+      url: `${process.env.FRONTEND_URL}/`,
     };
   }
 
