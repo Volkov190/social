@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  email: String!
+  name: String!
+  birthdate: DateTime!
+  gender: String!
+  friends: [User!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Message {
+  id: Int!
+  text: String!
+  fromUserId: Int!
+  toUserId: Int!
+}
+
+type Post {
+  id: Int!
+  title: String!
+  text: String!
+  author: User!
+}
+
+type Query {
+  users: [User!]!
+  posts: [Post!]!
+  getMessagesTo(userToId: Int!): [Message!]!
+}
+
+type Mutation {
+  createUser(user: InputUser!): User!
+  editUser(id: Float!, user: InputUser!): User!
+  deleteUser(id: Float!): User!
+  addFriend(userId: Float!, friendId: Float!): User!
+  deleteFriend(userId: Float!, friendId: Float!): User!
+  addMessage(message: InputMessage!): Message!
+}
+
+input InputUser {
+  email: String!
+  name: String!
+  birthdate: DateTime!
+  gender: Gender!
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+input InputMessage {
+  text: String!
+  toUserId: Int!
+}
+
+type Subscription {
+  messageSended: Message!
+}
